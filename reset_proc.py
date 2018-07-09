@@ -25,7 +25,7 @@ PORT = "4444"
 file = open("octo_log.txt", "r+")
 command = "dump_arm 0x0136AB40 10000\n" #hardcode here the first command to send to openocd
 print bcolors.HEADER + bcolors.BOLD + "Starting dump : " + command + bcolors.ENDC + bcolors.ENDC
-pro = subprocess.Popen("openocd -f jtagkey2.cfg -f Octo.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) #open a shell and launch openocd 
+pro = subprocess.Popen("openocd -f jtagkey2.cfg -f sta8090fgbd.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) #open a shell and launch openocd 
 ser = serial.Serial('/dev/ttyUSB0', 9600) #open serial connection to Arduino
 time.sleep(2) #wait for openocd initial setup
 tn = telnetlib.Telnet(HOST,PORT) #open Telnet connection
@@ -55,7 +55,7 @@ while(True):
 			print bcolors.WARNING + "PYTHON > Waiting for Arduino ACK" + bcolors.ENDC
 			time.sleep(1)
 		time.sleep(2) #wait for the board powerup
-		pro = subprocess.Popen("openocd -f jtagkey2.cfg -f Octo.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
+		pro = subprocess.Popen("openocd -f jtagkey2.cfg -f sta8090fgbd.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
 		time.sleep(2)
 		tn = telnetlib.Telnet(HOST, PORT) #open again telnet connection
 		tn.read_until("\n",1)
@@ -77,7 +77,7 @@ while(True):
 				print bcolors.WARNING + "PYTHON > Waiting for Arduino ACK" + bcolors.ENDC
 				time.sleep(1)
 			time.sleep(2) #wait for the board powerup
-			pro = subprocess.Popen("openocd -f jtagkey2.cfg -f Octo.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
+			pro = subprocess.Popen("openocd -f jtagkey2.cfg -f sta8090fgbd.cfg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
 			time.sleep(2)
 			tn = telnetlib.Telnet(HOST, PORT) #open again telnet connection
 			tn.read_until("\n",1)
